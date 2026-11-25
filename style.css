@@ -1,3 +1,18 @@
+/* ===== Design tokens ===== */
+:root {
+    --bg: #f4f5fb;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e7e8f0;
+    --accent: #6366f1;
+    --accent-2: #8b5cf6;
+    --accent-soft: #eef2ff;
+    --radius: 20px;
+    --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+    --shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.05), 0 16px 40px rgba(99, 102, 241, 0.12);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,74 +20,166 @@
 }
 
 body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: #e5e7eb;
-    color: white;
+    font-family: "Pretendard", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:
+        radial-gradient(circle at 15% 0%, rgba(99, 102, 241, 0.10), transparent 40%),
+        radial-gradient(circle at 85% 10%, rgba(139, 92, 246, 0.08), transparent 40%),
+        var(--bg);
+    color: var(--text);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
+/* ===== Layout ===== */
 .page {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 16px;
+    padding: 56px 20px;
 }
 
+.page > * {
+    width: 100%;
+    max-width: 720px;
+}
+
+/* ===== Cards ===== */
 .profile-card,
 .section.card {
-    background-color: black;
-    border-radius: 16px;
-    padding: 24px 24px 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
-    border: 1px solid #e5e7eb;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
+.profile-card:hover,
+.section.card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.section.card h2 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 3px solid var(--accent);
+    line-height: 1.3;
+}
+
+/* ===== Profile ===== */
 .profile-card {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 20px;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 상단 그라데이션 라인 */
+.profile-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.profile-card h1 {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+}
+
+.profile-card p {
+    color: var(--text-muted);
+    font-size: 14px;
 }
 
 .avatar {
     width: 96px;
     height: 96px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #f9fafb;
-    font-size: 32px;
+    color: #fff;
+    font-size: 34px;
+    font-weight: 700;
+    box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px var(--accent-soft),
+        0 10px 24px rgba(99, 102, 241, 0.35);
 }
 
+/* ===== Info grid ===== */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px 16px;
+    gap: 12px 20px;
+    font-size: 14px;
 }
 
+.info-grid > * {
+    overflow-wrap: anywhere;
+}
+
+/* ===== Tags ===== */
 .tag-list {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
 .tag {
     font-size: 12px;
-    padding: 4px 10px;
+    font-weight: 600;
+    padding: 5px 12px;
     border-radius: 999px;
-    background-color: #eef2ff;
+    background-color: var(--accent-soft);
     color: #4338ca;
+    border: 1px solid #e0e7ff;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.tag:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== Footer ===== */
 .footer {
     text-align: center;
-    margin-top: 12px;
+    margin-top: 24px;
+    font-size: 13px;
     color: #9ca3af;
-
 }
 
+/* ===== Mobile ===== */
+@media (max-width: 560px) {
+    .page {
+        padding: 32px 14px;
+    }
 
+    .profile-card {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card .tag-list {
+        justify-content: center;
+    }
+}
