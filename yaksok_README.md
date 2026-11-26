@@ -14,7 +14,9 @@
    GEMINI_API_KEY=제미나이_API_키
    DATA_GO_KR_KEY=공공데이터포털_API_키
    ```
-4. 실행합니다. `DRY_RUN`을 켜면 디스코드로 보내지 않고 화면에만 출력합니다.
+4.실행하고 설정에서 gemini_api_key를 입력합니다. 알림 채널또한 필요한 만큼 입력하고 필요하다면 깃허브 레포 주소나 토큰 또한 입력합니다.
+
+5. 실행합니다. `DRY_RUN`을 켜면 디스코드로 보내지 않고 화면에만 출력합니다.
    ```
    cd yaksok/src
    # Windows PowerShell
@@ -22,6 +24,7 @@
    # Mac / Linux
    DRY_RUN=1 TEST_MODE=1 python main.py
    ```
+6. 실행합니다.`yaksok/src` 폴더`를 실행하면 메뉴가 뜨고 이 메뉴에서 필요하신 기능들을 이용할 수 있습니다.
 
 ## 느낀 점 및 가장 중요하게 생각하는 부분 (박채민)
 
